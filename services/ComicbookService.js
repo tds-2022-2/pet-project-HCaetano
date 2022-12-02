@@ -1,11 +1,19 @@
 const ComicbookModel = require("../models/ComicbookModel");
 
-const createComicbook = async (comicbookFromRequest) =>
+const createComicbook = (comicbookFromRequest) =>
   ComicbookModel.createComicbook(comicbookFromRequest);
 
-const findAllComicbooks = async () => ComicbookModel.findAllComicbooks();
+const findAllComicbooks = () => ComicbookModel.findAllComicbooks();
+
+const findComicbookById = (idFromRequest) =>
+  ComicbookModel.findComicbookById(idFromRequest);
+
+const updateComicbook = (comicbookFromRequest) =>
+  ComicbookModel.updateComicbook(comicbookFromRequest);
 
 module.exports = {
   createComicbook,
   findAllComicbooks,
+  findComicbookById,
+  updateComicbook,
 };

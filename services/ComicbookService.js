@@ -8,12 +8,16 @@ const findAllComicbooks = () => ComicbookModel.findAllComicbooks();
 const findComicbookById = (idFromRequest) =>
   ComicbookModel.findComicbookById(idFromRequest);
 
-const updateComicbook = (comicbookFromRequest) =>
-  ComicbookModel.updateComicbook(comicbookFromRequest);
+const updateComicbookCompletely = (comicbookFromRequest) =>
+  ComicbookModel.updateComicbookCompletely(comicbookFromRequest);
+
+const updateComicbookPartially = (id, propToUpdate) =>
+  ComicbookModel.updateComicbookPartially(id, propToUpdate);
 
 module.exports = {
   createComicbook,
   findAllComicbooks,
   findComicbookById,
-  updateComicbook,
+  updateComicbookCompletely,
+  updateComicbookPartially,
 };

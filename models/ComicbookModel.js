@@ -28,7 +28,7 @@ const findComicbookById = (idFromRequest) => {
   return comicbook;
 };
 
-const updateComicbook = (comicbook) => {
+const updateComicbookCompletely = (comicbook) => {
   const { id, name, issue, year } = comicbook;
   const comicbookToBeUpdatedIndex = comicbookList.findIndex(
     (comicbook) => comicbook.id === id
@@ -40,9 +40,27 @@ const updateComicbook = (comicbook) => {
   return updatedComicbook;
 };
 
+const updateComicbookPartially = (id, propToUpdate) => {
+  const comicbookToBeUpdatedIndex = comicbookList.findIndex(
+    (comicbook) => comicbook.id === id
+  );
+  const comicbookToBeUpdated = comicbookList.find(
+    (comicbook) => comicbook.id === id
+  );
+  const propName = Object.keys(propToUpdate)[0];
+  const propValue = Object.values(propToUpdate)[0];
+  const updatedComicbook = { ...comicbookToBeUpdated };
+  updatedComicbook[propName] = propValue;
+
+  comicbookList.splice(comicbookToBeUpdatedIndex, 1, updatedComicbook);
+
+  return updatedComicbook;
+};
+
 module.exports = {
   createComicbook,
   findAllComicbooks,
   findComicbookById,
-  updateComicbook,
+  updateComicbookCompletely,
+  updateComicbookPartially,
 };

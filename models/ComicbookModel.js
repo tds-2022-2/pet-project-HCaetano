@@ -17,12 +17,10 @@ const createComicbook = (comicbookFromRequest) => {
 };
 
 const deleteComicbook = (idFromRequest) => {
-  console.log("id:", idFromRequest);
   const comicbookToBeUpdatedIndex = comicbookList.findIndex(
     (comicbook) => comicbook.id === idFromRequest
   );
   const originalSize = comicbookList.length;
-  console.log("index:", comicbookToBeUpdatedIndex);
 
   comicbookList.splice(comicbookToBeUpdatedIndex, 1);
   const currentSize = comicbookList.length;

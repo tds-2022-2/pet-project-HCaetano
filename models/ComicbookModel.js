@@ -11,9 +11,16 @@ const createComicbook = async (comicbookFromRequest) => {
   const { id, name, issue, year } = comicbookFromRequest;
 
   const newComicbook = { id, name, issue, year };
-  console.log(newComicbook);
+  comicbookList.push(newComicbook);
+
+  return newComicbook;
+};
+
+const findAllComicbooks = async () => {
+  return comicbookList;
 };
 
 module.exports = {
   createComicbook,
+  findAllComicbooks,
 };

@@ -1,6 +1,5 @@
 const {
   FIELDS_MUST_BE_FILLED,
-  ID_MUST_BE_STRING,
   ISSUE_MUST_BE_NUMBER,
   NAME_MUST_BE_STRING,
   YEAR_MUST_BE_STRING,
@@ -8,11 +7,7 @@ const {
 const { BAD_REQUEST } = require("../dictionary/statusCodes");
 
 const validateFieldTypes = (request, response, next) => {
-  const { id, name, issue, year } = request.body;
-
-  if (typeof id !== "string") {
-    return response.status(BAD_REQUEST).json({ message: ID_MUST_BE_STRING });
-  }
+  const { name, issue, year } = request.body;
 
   if (typeof name !== "string") {
     return response.status(BAD_REQUEST).json({ message: NAME_MUST_BE_STRING });

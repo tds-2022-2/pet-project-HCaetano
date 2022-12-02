@@ -12,6 +12,10 @@ const {
   COULD_NOT_DELETE,
   USE_PUT_INSTEAD,
 } = require("../dictionary/errorMessages");
+const {
+  validateFieldTypes,
+  validateThatFieldsAreNotEmpty,
+} = require("../middleware/validations");
 
 const ComicbookController = new Router();
 
@@ -41,20 +45,25 @@ ComicbookController.get("/:id", (request, response) => {
   response.status(OK).json(foundComicbook);
 });
 
-ComicbookController.post("/", (request, response) => {
-  const comicbookFromRequest = request.body;
-  //   comicbookFromRequest.id = randomUUID();
-  //   const comicbookWithId = Object.assign({}, comicbookFromRequest, {
-  //     id: randomUUID(),
-  //   });
-  //   const comicbookWithId = { ...comicbookFromRequest, id: randomUUID() };
-  // TODO
+ComicbookController.post(
+  "/",
+  validateThatFieldsAreNotEmpty,
+  validateFieldTypes,
+  (request, response) => {
+    const comicbookFromRequest = request.body;
+    //   comicbookFromRequest.id = randomUUID();
+    //   const comicbookWithId = Object.assign({}, comicbookFromRequest, {
+    //     id: randomUUID(),
+    //   });
+    //   const comicbookWithId = { ...comicbookFromRequest, id: randomUUID() };
+    // TODO
 
-  const createdComicbook =
-    ComicbookService.createComicbook(comicbookFromRequest);
+    const createdComicbook =
+      ComicbookService.createComicbook(comicbookFromRequest);
 
-  response.status(CREATED).json(createdComicbook);
-});
+    response.status(CREATED).json(createdComicbook);
+  }
+);
 
 ComicbookController.patch("/:id", (request, response) => {
   const { id } = request.params;

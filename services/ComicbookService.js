@@ -3,6 +3,9 @@ const ComicbookModel = require("../models/ComicbookModel");
 const createComicbook = (comicbookFromRequest) =>
   ComicbookModel.createComicbook(comicbookFromRequest);
 
+const deleteComicbook = (idFromRequest) =>
+  ComicbookModel.deleteComicbook(idFromRequest);
+
 const findAllComicbooks = () => ComicbookModel.findAllComicbooks();
 
 const findComicbookById = (idFromRequest) =>
@@ -16,6 +19,7 @@ const updateComicbookPartially = (id, propToUpdate) =>
 
 module.exports = {
   createComicbook,
+  deleteComicbook,
   findAllComicbooks,
   findComicbookById,
   updateComicbookCompletely,

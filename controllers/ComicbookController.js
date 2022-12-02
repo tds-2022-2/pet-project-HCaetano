@@ -1,10 +1,31 @@
 const { Router } = require("express");
 const { randomUUID } = require("crypto");
 const ComicbookService = require("../services/ComicbookService");
-const { BAD_REQUEST, CREATED, OK } = require("../dictionary/statusCodes");
-const { USE_PUT_INSTEAD } = require("../dictionary/errorMessages");
+const {
+  BAD_REQUEST,
+  CREATED,
+  INTERNAL_SERVER_ERROR,
+  NO_CONTENT,
+  OK,
+} = require("../dictionary/statusCodes");
+const {
+  COULD_NOT_DELETE,
+  USE_PUT_INSTEAD,
+} = require("../dictionary/errorMessages");
 
 const ComicbookController = new Router();
+
+ComicbookController.delete("/:id", (request, response) => {
+  const { id } = request.params;
+
+  const deleteSuccessful = ComicbookService.deleteComicbook(id);
+
+  if (!deleteSuccessful) {
+    response.status(INTERNAL_SERVER_ERROR).json(COULD_NOT_DELETE);
+  }
+
+  response.status(NO_CONTENT).json("Delete was successful");
+});
 
 ComicbookController.get("/", (_, response) => {
   const foundComicbooks = ComicbookService.findAllComicbooks();

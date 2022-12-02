@@ -1,17 +1,15 @@
 const BAD_REQUEST = 400;
-// const CONFLICT = 409;
 const CREATED = 201;
-// const NO_CONTENT = 204;
+const INTERNAL_SERVER_ERROR = 500;
+const NO_CONTENT = 204;
 // const NOT_FOUND = 404;
 const OK = 200;
-// const UNAUTHORIZED = 401;
 
 module.exports = {
   BAD_REQUEST,
-  //   CONFLICT,
   CREATED,
-  //   NO_CONTENT,
+  INTERNAL_SERVER_ERROR,
+  NO_CONTENT,
   //   NOT_FOUND,
   OK,
-  //   UNAUTHORIZED,
 };

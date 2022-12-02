@@ -16,6 +16,24 @@ const createComicbook = (comicbookFromRequest) => {
   return newComicbook;
 };
 
+const deleteComicbook = (idFromRequest) => {
+  console.log("id:", idFromRequest);
+  const comicbookToBeUpdatedIndex = comicbookList.findIndex(
+    (comicbook) => comicbook.id === idFromRequest
+  );
+  const originalSize = comicbookList.length;
+  console.log("index:", comicbookToBeUpdatedIndex);
+
+  comicbookList.splice(comicbookToBeUpdatedIndex, 1);
+  const currentSize = comicbookList.length;
+
+  if (currentSize >= originalSize) {
+    return false;
+  }
+
+  return true;
+};
+
 const findAllComicbooks = () => {
   return comicbookList;
 };
@@ -59,6 +77,7 @@ const updateComicbookPartially = (id, propToUpdate) => {
 
 module.exports = {
   createComicbook,
+  deleteComicbook,
   findAllComicbooks,
   findComicbookById,
   updateComicbookCompletely,

@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { randomUUID } = require("crypto");
+// const { randomUUID } = require("crypto");
 const ComicbookService = require("../services/ComicbookService");
 const {
   BAD_REQUEST,
@@ -64,9 +64,6 @@ ComicbookController.post(
   (request, response) => {
     const comicbookFromRequest = request.body;
     //   comicbookFromRequest.id = randomUUID();
-    //   const comicbookWithId = Object.assign({}, comicbookFromRequest, {
-    //     id: randomUUID(),
-    //   });
     //   const comicbookWithId = { ...comicbookFromRequest, id: randomUUID() };
     // TODO
 

@@ -1,0 +1,100 @@
+swagger: "2.0"
+info:
+  title: Comicbook collection handler
+  description: API that provides CRUD operations related to Comicbooks
+  version: 0.5.2
+host: localhost:3000
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+
+paths:
+  /comicbooks:
+    get:
+      summary: Retuns a list of comicbooks
+      description: Returns all available comicbooks at the time, if any
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Succesfully returns list of comicbooks
+        404:
+          description: There are no comicbooks to show
+    post:
+      summary: Creates a single comicbook
+      description: Creates a new comicbook based on data sent via request body
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Succesfully creates the comicbook with the data received
+  /comicbooks/{id}:
+    get:
+      summary: Retuns a single comicbook
+      description: Returns specific comicbook, retrieved base on its id
+      parameters: 
+        - in: path
+        name: id
+        type: string
+        description: Comicbook id to find in memory
+        required: true
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Succesfully returns the desired comicbook
+        404:
+          description: Comicbook not found   
+    delete: 
+      summary: Deletes a single comicbook
+      description: Deletes specific comicbook after searching for it via its id
+      parameters: 
+        - in: path
+        name: id
+        type: string
+        description: Comicbook id to delete from memory
+        required: true
+      produces:
+        - application/json
+      responses:
+        204:
+          description: Succesfully deletes the comicbook informed
+        500:
+          description: Couldn't delete the comicbook. Either couldn't find it or couldn't process the deletion operation
+    put: 
+      summary: Updates a single comicbook in its entirety
+      description: Updates a specific comicbook, changing all of its keys
+      parameters: 
+        - in: path
+        name: id
+        type: string
+        description: Comicbook id to be updated in memory
+        required: true
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Succesfully updates the comicbook informed
+        404:
+          description: Comicbook not found   
+    patch: 
+      summary: Updates a single key in a comicbook 
+      description: Updates a specific comicbook, changing only one of its keys
+      parameters: 
+        - in: path
+        name: id
+        type: string
+        description: Comicbook id to be updated in memory
+        required: true
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Succesfully updates the comicbook informed
+        404:
+          description: User provided more than one key to be updated, should use PUT instead  
+        404:
+          description: Comicbook not found   

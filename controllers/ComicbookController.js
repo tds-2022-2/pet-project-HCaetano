@@ -65,7 +65,6 @@ ComicbookController.post(
     const comicbookFromRequest = request.body;
     //   comicbookFromRequest.id = randomUUID();
     //   const comicbookWithId = { ...comicbookFromRequest, id: randomUUID() };
-    // TODO
 
     const createdComicbook =
       ComicbookService.createComicbook(comicbookFromRequest);
@@ -77,10 +76,6 @@ ComicbookController.post(
 ComicbookController.patch("/:id", (request, response) => {
   const { id } = request.params;
   const isThereMoreThanOnePropToUpdate = Object.keys(request.body).length > 1;
-
-  if (!foundComicbook) {
-    return response.status(NOT_FOUND).json(COULD_NOT_FIND_COMICBOOK);
-  }
 
   if (isThereMoreThanOnePropToUpdate) {
     return response.status(BAD_REQUEST).json({ message: USE_PUT_INSTEAD });

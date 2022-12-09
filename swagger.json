@@ -1,0 +1,196 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Comicbook collection handler",
+    "description": "API that provides CRUD operations related to Comicbooks",
+    "version": "0.3"
+  },
+  "definitions": {
+    "comicbook": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "issue": {
+          "type": "number"
+        },
+        "year": {
+          "type": "string"
+        }
+      }
+    },
+    "comicbookToBeUpdated": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "issue": {
+          "type": "number"
+        },
+        "year": {
+          "type": "string"
+        }
+      }
+    },
+    "comicbookWithOneProp": {
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": ["http"],
+  "paths": {
+    "/comicbooks/": {
+      "get": {
+        "tags": ["Comicbooks"],
+        "description": "Find all available comicbooks",
+        "operationId": "FindAll",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Succesfully returns list of comicbooks"
+          },
+          "400": {
+            "description": "There are no comicbooks to show"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Comicbooks"],
+        "description": "Creates a new comicbook based on data sent via request body",
+        "operationId": "Create",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Comicbook data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/comicbook"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Succesfully creates the comicbook with the data received"
+          }
+        }
+      }
+    },
+    "/comicbooks/{id}": {
+      "get": {
+        "tags": ["Comicbooks"],
+        "description": "Returns specific comicbook, retrieved base on its id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "Comicbook id to find in memory",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfully returns the desired comicbook"
+          },
+          "404": {
+            "description": "Comicbook not found"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Comicbooks"],
+        "description": "Updates a specific comicbook, changing all of its keys",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "Comicbook id to be updated in memory",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Comicbook data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/comicbookToBeUpdated"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfully updates the comicbook informed"
+          },
+          "404": {
+            "description": "Comicbook not found"
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Comicbooks"],
+        "description": "Updates a specific comicbook, changing only one of its keys",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "Comicbook id to be updated in memory",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Comicbook data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/comicbookWithOneProp"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfully updates the comicbook informed"
+          },
+          "400": {
+            "description": "User provided more than one key to be updated, should use PUT instead "
+          },
+          "404": {
+            "description": "Comicbook not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Comicbooks"],
+        "description": "Deletes specific comicbook after searching for it via its id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "Comicbook id to delete from memory",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfully deletes the comicbook informed"
+          },
+          "500": {
+            "description": "Couldn't delete the comicbook. Either couldn't find it or couldn't process the deletion operation"
+          }
+        }
+      }
+    }
+  }
+}
